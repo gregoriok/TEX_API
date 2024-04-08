@@ -5,9 +5,9 @@ def preencher_endereco_por_cep(cep):
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
-        logradouro = data.get('logradouro')
-        cidade = data.get('localidade')
-        uf = data.get('uf')
-        return logradouro, cidade, uf
+        Logradouro = data.get('logradouro')
+        Cidade = data.get('localidade')
+        Uf = data.get('uf')
+        return Logradouro, Cidade, Uf
     else:
         return None, None, None

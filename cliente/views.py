@@ -1,23 +1,17 @@
 from rest_framework import viewsets
 from cliente.models import Cliente, Endereco
-from cliente.serializer import ClienteSerializer, EnderecoSerializer
+# from cliente.serializer import ClienteSerializer, EnderecoSerializer
 from django.shortcuts import redirect, render, get_object_or_404
 from cliente.forms import ClienteForm, EnderecoForm
 from django.http import JsonResponse
 from cliente.api import preencher_endereco_por_cep
 import logging
+from cliente.validators import *
+from rest_framework import serializers
+from django.core.exceptions import ValidationError   
 
 
-class ClientesViewSet(viewsets.ModelViewSet):
-    """Exibindo todos os clientes"""
-    queryset = Cliente.objects.all()
-    serializer_class = ClienteSerializer
 
-class EnderecosViewSet(viewsets.ModelViewSet):
-    """Exibindo todos os Enderecos"""
-    queryset = Endereco.objects.all()
-    serializer_class = EnderecoSerializer
-    
 def clientes_view(request):
     clientes = Cliente.objects.all()
     return render(request, 'clientes.html', {'clientes': clientes})
@@ -59,7 +53,22 @@ def enderecos_cliente(request, cliente_id):
     enderecos = Endereco.objects.filter(Codigo_cliente_id=cliente_id)
 
     return render(request, 'enderecos_cliente.html', {'cliente': cliente, 'enderecos': enderecos})
-
+    # data = {
+    #     'cliente': {
+    #         'id': cliente.id,
+    #         'nome': cliente.Nome,
+    #         # Adicione outros campos do cliente conforme necessário
+    #     },
+    #     'enderecos': [
+    #         {
+    #             'id': endereco.id,
+    #             'logradouro': endereco.Logradouro,
+    #             # Adicione outros campos do endereço conforme necessário
+    #         }
+    #         for endereco in enderecos
+    #     ]
+    # }
+    # return JsonResponse(data)
 # FUNÇÕES RELACIONADAS AO ENDEREÇO
 
 def adicionar_endereco(request, cliente_id):

@@ -23,8 +23,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
-router.register('clientes',ClientesViewSet, basename='Clientes')
-router.register('Enderecos',EnderecosViewSet, basename='Enderecos')
+# router.register('clientes',ClientesViewSet, basename='Clientes')
+# router.register('Enderecos',EnderecosViewSet, basename='Enderecos')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
