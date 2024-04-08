@@ -1,0 +1,41 @@
+ul {
+    list-style-type: none; /* Remover marcadores de lista */
+    padding: 0;
+}
+li {
+background-color: #f9f9f9; /* Cor de fundo alternada para destacar os endereços */
+padding: 10px;
+margin-bottom: 10px; /* Margem inferior para separação entre os endereços */
+border-radius: 5px; /* Cantos arredondados para estética */
+margin-top: 10px; /* Margem superior entre os endereços */
+}
+.endereco-header {
+font-weight: bold; /* Fonte em negrito para o cabeçalho */
+margin-bottom: 5px; /* Margem inferior para separar o cabeçalho do conteúdo */
+}
+body {
+font-family: Arial, sans-serif;
+background-color: #f4f4f4;
+padding: 20px;
+text-align: center; /* Centralizar o conteúdo do body */
+}
+h1 {
+margin-bottom: 20px;
+}
+a.button {
+margin-top: 10px;
+text-decoration: none;
+color: #fff;
+background-color: #007bff;
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+font-size: 16px;
+cursor: pointer;
+display: inline-block;
+width: auto;
+text-align: center;
+}
+a.button:hover {
+background-color: #0056b3;
+}

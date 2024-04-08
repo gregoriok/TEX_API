@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endereços</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'endereco_cliente.css' %}">
+</head>
+<body>
+    <h1>Endereços do cliente {{cliente.Nome}}</h1>
+    <ul>
+        {% for endereco in enderecos %}
+            <li>
+                {% if forloop.first %}
+                    <div class="endereco-header">Endereço 1</div>
+                {% else %}
+                    <div class="endereco-header">Endereço {{ forloop.counter }}</div>
+                {% endif %}
+                <strong>Cep:</strong> {{ endereco.Cep }}<br>
+                <strong>UF:</strong> {{ endereco.Uf }}<br>
+                <strong>Bairro:</strong> {{ endereco.Bairro }}<br>
+                <strong>Cidade:</strong> {{ endereco.Cidade }}<br>
+                <strong>Logradouro:</strong> {{ endereco.Logradouro }}<br>
+                <form action="{% url 'excluir_endereco' endereco.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Excluir</button>
+                </form>
+            </li> 
+        {% endfor %}
+    </ul>
+    <a href="{% url 'adicionar_endereco' cliente_id=cliente.id %}" class="button">Adicionar Endereço</a>
+    <a href="{% url 'clientes' %}" class="button">Voltar à Lista</a>
+</body>
+</html>

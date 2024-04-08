@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Clientes</title>
+    <style>
+        .card-container {
+            display: flex; 
+            flex-wrap: wrap; 
+        }
+        .card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: calc(20% - 20px);
+        }
+        .card h2 {
+            margin-top: 0; 
+        }
+        body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+        text-align: center; /* Centralizar o conteúdo do body */
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="email"], input[type="number"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            width: calc(100% - 22px);
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        a.button {
+            margin-top: 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            display: inline-block;
+            width: 88%;
+            text-align: center;
+        }
+        a.button:hover {
+            background-color: #0056b3;
+        }
+        a.buttonAdicionar {
+            margin-top: 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            display: inline-block;
+            width: auto;
+            text-align: center;
+        }
+        a.buttonAdicionar:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Clientes</h1>
+    <div class="card-container">
+        {% for cliente in clientes %}
+            <div class="card">
+                <h2>{{ cliente.Nome }}</h2>
+                <p><strong>Documento:</strong> {{ cliente.Documento }}</p>
+                <p><strong>Email:</strong> {{ cliente.Email }}</p>
+                <form action="{% url 'enderecos_cliente' cliente.id %}" method="GET">
+                    {% csrf_token %}
+                    <button type="submit">Ver Endereços</button>
+                </form>
+                <a href="{% url 'editar_cliente' cliente.id %}" class="button">Editar</a>
+                <form action="{% url 'excluir_cliente' cliente.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este cliente?')">Excluir</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'adicionar_cliente' %}" class="buttonAdicionar">Adicionar Cliente</a>
+</body>
+</html>
