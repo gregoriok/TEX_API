@@ -6,11 +6,6 @@ from cliente.forms import ClienteForm, EnderecoForm
 from django.http import JsonResponse
 from cliente.api import preencher_endereco_por_cep
 import logging
-from cliente.validators import *
-from rest_framework import serializers
-from django.core.exceptions import ValidationError   
-
-
 
 def clientes_view(request):
     clientes = Cliente.objects.all()

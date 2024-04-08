@@ -1,7 +1,6 @@
 from django import forms
 from .models import Cliente, Endereco
 from cliente.validators import *
-import logging
 class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
